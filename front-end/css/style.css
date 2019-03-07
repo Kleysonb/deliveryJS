@@ -1,0 +1,29 @@
+.card-centro{
+    margin: auto;
+    margin-top: 2%;
+    width: 80%;
+}
+
+.card-extra {
+    margin: auto;
+    margin-bottom: 2%;
+    /* width: 90%; */
+}
+
+h1 {
+    margin: 2%;
+    text-align: center;
+}
+
+.criado-em{
+    width: 100%;
+    text-align: right;
+}
+
+.btn {
+    margin: 1px;
+}
+
+.grupo-button{
+    margin: 2%;
+}
