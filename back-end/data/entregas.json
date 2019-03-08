@@ -1,6 +1,12 @@
 [
     {
-        "materiais": [
+        "id": "77e8d536-03d6-4505-a655-4cbb33e9158f",
+        "criada_em": "07/03/2019",
+        "concluida_em": null,
+        "entrega_concluida": false,
+        "prevista_para": "22/03/2019",
+        "anotacoes": "Ok",
+        "produtos": [
             {
                 "nome": "Cimento Ciplan",
                 "quantidade": 10,
@@ -23,66 +29,56 @@
                 "entregue": true
             }
         ],
-        "criada_em": "07/03/2019",
-        "prevista_para": "22/03/2019",
-        "concluida_em": null,
-        "entrega_concluida": false,
-        "responsavel": "Josias Rodrigues",
-        "anotacoes": "Nenhuma Anotação"
+        "destinatario": {
+            "nome": "Fulano de Tal",
+            "telefone": "99999999999",
+            "endereco": {
+                "cep": "65918309",
+                "endereco": "Rua Sessenta e Seis",
+                "numero": "427",
+                "bairro": "Vila Vitória",
+                "cidade": "Imperatriz",
+                "estado": "MA",
+                "complemento": ""
+            }
+        },
+        "responsavel": {
+            "nome": "Josias Rodrigues",
+            "telefone": "99999999999"
+        }
     },
     {
-        "materiais": [
+        "id": "77e8d536-03d6-4505-a655-4cbb33e9158f",
+        "criada_em": "07/03/2019",
+        "concluida_em": null,
+        "entrega_concluida": false,
+        "prevista_para": "22/03/2019",
+        "anotacoes": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam accumsan ornare hendrerit. Morbi molestie mattis dui. Donec viverra diam eu tincidunt congue. Duis interdum pulvinar sapien, a imperdiet nisi porttitor et.",
+        "produtos": [
             {
                 "nome": "Cimento Ciplan",
                 "quantidade": 10,
                 "unidade_medida": "Unidade",
                 "anotacoes": "Nenhuma Anotação",
                 "entregue": false
-            },
-            {
-                "nome": "Areia",
-                "quantidade": 1,
-                "unidade_medida": "Metro",
-                "anotacoes": "Nenhuma Anotação",
-                "entregue": false
-            },
-            {
-                "nome": "Tijolo",
-                "quantidade": 1000,
-                "unidade_medida": "Unidade",
-                "anotacoes": "Nenhuma Anotação",
-                "entregue": true
             }
         ],
-        "criada_em": "07/03/2019",
-        "prevista_para": "22/03/2019",
-        "concluida_em": null,
-        "entrega_concluida": false,
-        "responsavel": "Josias Rodrigues",
-        "anotacoes": "Nenhuma Anotação"
-    },
-    {
-        "materiais": [
-            {
-                "nome": "Cimento Ciplan",
-                "quantidade": 10,
-                "unidade_medida": "Unidade",
-                "anotacoes": "Nenhuma Anotação",
-                "entregue": true
-            },
-            {
-                "nome": "Seixo",
-                "quantidade": 1,
-                "unidade_medida": "Metro",
-                "anotacoes": "Nenhuma Anotação",
-                "entregue": true
+        "destinatario": {
+            "nome": "Cicrano",
+            "telefone": "99999999999",
+            "endereco": {
+                "cep": "65918309",
+                "endereco": "Rua Sessenta e Seis",
+                "numero": "427",
+                "bairro": "Vila Vitória",
+                "cidade": "Imperatriz",
+                "estado": "MA",
+                "complemento": ""
             }
-        ],
-        "criada_em": "07/03/2019",
-        "prevista_para": "22/03/2019",
-        "concluida_em": "22/03/2019",
-        "entrega_concluida": true,
-        "responsavel": "Josias Rodrigues",
-        "anotacoes": "Nenhuma Anotação"
+        },
+        "responsavel": {
+            "nome": "Beltrano",
+            "telefone": "99999999999"
+        }
     }
 ]
