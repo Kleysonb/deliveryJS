@@ -17,7 +17,7 @@ export class ListarEntregasView extends View {
                         <div class="card card-extra">
                             <ul class="list-group list-group-flush">
                                 ${entrega.produtos.map(produto =>
-                                    `<li class="list-group-item">
+                                    `<li class="list-group-item ${ produto.entregue ? "produto-entregue" : "produto-nao-entregue" }">
                                         ${ produto.nome }, ${ produto.quantidade } ${ produto.quantidade > 1 ? produto.unidade_medida+"s" : produto.unidade_medida }
                                     </li>`
                                 ).join('')}
@@ -26,9 +26,9 @@ export class ListarEntregasView extends View {
                         <h6 class="card-subtitle mb-2 text-muted criado-em">Criada em: ${ entrega.criada_em }</h6>
                         <p class="card-text"> ${ entrega.anotacoes } </p>
                         <div class="grupo-button">
-                            <button type="button" class="btn btn-primary float-left">Editar</button>
-                            <button type="button" class="btn btn-danger float-left">Apagar</button>
-                            <button type="button" class="btn btn-success float-right">Entrega Feita</button>
+                            <button type="button" id="${ entrega.id }" class="btn-editar btn btn-primary float-left">Editar</button>
+                            <button type="button" id="${ entrega.id }" class="btn-apagar btn btn-danger float-left">Apagar</button>
+                            <button type="button" id="${ entrega.id }" class="btn-entregar btn btn-success float-right">Entrega Feita</button>
                         </div>
                     </div>
                 </div>`
@@ -57,7 +57,7 @@ export class ListarEntregasView extends View {
     }
 
     atualiza(model) {
-        console.log(model);
+        // console.log(model);
         this.$seletor.innerHTML = this.getTemplate(model);
     }
 }

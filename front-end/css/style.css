@@ -24,6 +24,14 @@ h1 {
     margin: 1px;
 }
 
+.produto-nao-entregue {
+    background-color: #f3baba;
+}
+
+.produto-entregue {
+    background-color: #c3ffac;
+}
+
 .grupo-button{
     margin: 2%;
 }
