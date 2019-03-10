@@ -7,4 +7,8 @@ export class View {
     getTemplate(){
         throw new Error('Método getTemplate() precisa ser inicializado nas classes filhas');
     }
+
+    getSeletor(){
+        return this.$seletor;
+    }
 }

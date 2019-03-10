@@ -7,7 +7,9 @@ export class ListarEntregasView extends View {
     }
 
     getTemplate(model) {
-
+        if(model.lenght === 0){
+            return '<h5>Você não possui nenhuma entrega!</h5>'
+        }
         return `${model.map(
             entrega => 
                 `<div class="card card-centro">
@@ -28,28 +30,17 @@ export class ListarEntregasView extends View {
                         <div class="grupo-button">
                             <button type="button" id="${ entrega.id }" class="btn-editar btn btn-primary float-left">Editar</button>
                             <button type="button" id="${ entrega.id }" class="btn-apagar btn btn-danger float-left">Apagar</button>
-                            <button type="button" id="${ entrega.id }" class="btn-entregar btn btn-success float-right">Entrega Feita</button>
+                            <button type="button" id="${ entrega.id }" class="btn-entregar btn btn-success float-right">Concluir Entrega</button>
                         </div>
                     </div>
                 </div>`
-            )}`;
-
-        // `<div class="card card-centro">
-        //     <div class="card-body">
-        //         <div class="card card-extra">
-        //             <ul class="list-group list-group-flush">
-        //                 <li class="list-group-item">Cras justo odio</li>
-        //             </ul>
-        //         </div>
-        //         <h6 class="card-subtitle mb-2 text-muted criado-em">Criada em: 06/03/2019</h6>
-        //         <p class="card-text">  </p>
-        //         <div class="grupo-button">
-        //             <button type="button" class="btn btn-primary float-left">Editar</button>
-        //             <button type="button" class="btn btn-danger float-left">Apagar</button>
-        //             <button type="button" class="btn btn-success float-right">Entrega Feita</button>
-        //         </div>
-        //     </div>
-        // </div>`;
+            )}
+            
+            <div class="botao-nova-entrega">
+                <button type="button" class="btn btn-nova-entrega btn-light">Adicionar Nova Entrega</button>
+            </div>
+            
+            `;
     }
 
     isPlural(quantidade){

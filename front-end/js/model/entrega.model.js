@@ -8,7 +8,7 @@ import { BaseService } from '../services/base.sevice.js';
 export class EntregaModel extends BaseService {
 
     constructor() {
-        super('entregas.json');
+        super('entregas');
     }
 
     criarEntrega(prevista_para, anotacoes, produtos, destinatario, responsavel) {
@@ -43,8 +43,17 @@ export class EntregaModel extends BaseService {
         return super.readAll();
     }
 
-    addEntrega() {
-        console.log(this);
+    addEntrega(entrega) {
+        super.create(entrega);
+    }
+
+    apagarEntrega(id) {
+        return super.delete(id);
+    }
+
+    concluirEntrega(id) {
+        // console.log("Concluir entrega model")
+        return super.getPersonalizado('concluirEntrega', id);
     }
 
 }

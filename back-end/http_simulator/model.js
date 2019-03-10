@@ -20,11 +20,18 @@ export class EntregaModel {
         console.log(entrega);
         return entrega;
     }
+
+    static concluirEntregaServidor(entrega) {
+        console.log("Concluindo entrega no servidor");
+        entrega.concluida_em = new Date();
+        entrega.entrega_concluida = true;
+        entrega.produtos.map(produto => produto.entregue = true);
+    }
 }
 
 export class ListaEntregasModel {
 
-    static addEntrega(url, entrega){
+    static addEntrega(url, entrega) {
         var lista_entregas = localStorage.getItem(url);
         console.log(lista_entregas);
         lista_entregas = !lista_entregas ? new Array() : JSON.parse(lista_entregas);

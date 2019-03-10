@@ -4,6 +4,24 @@
     width: 80%;
 }
 
+/* .botao-nova-entrega{ */
+    /* margin: auto; */
+    /* margin: 2%; */
+    /* text-align: center; */
+    /* width: 80%; */
+/* } */
+
+.botao-nova-entrega {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #c1c1c1;
+    color: white;
+    padding: 1%;
+    text-align: center;
+ }
+
 .card-extra {
     margin: auto;
     margin-bottom: 2%;

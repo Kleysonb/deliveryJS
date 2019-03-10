@@ -1,75 +1,74 @@
 import { EntregaModel } from '../js/model/entrega.model.js';
 import { ListarEntregasView } from '../js/view/listar_entregas.view.js';
-import { HttpSimulator } from '../../back-end/http_simulator/http_simulator.js';
+import { FormAdicionarEntregaController } from '../js/controller/form_adicionar_entrega.controller.js';
 
 export class App {
 
-        static recuperarDadosEntregaModel() {
-                let entrega = new EntregaModel();
-                this.atualizarTemplateEntregaView(entrega.getEntregas());
-                // entrega.getEntregas().then(
-                //         entregas => {
-                //                 this.atualizarTemplateEntregaView(entregas);
-                //                 // this.criarEntrega(entregas[0]);
-                //                 // this.criarEntrega(entregas[1]);
-                //         }
-                // ).catch(
-                //         error => {
-                //                 console.log(error)
-                //         }
-                // );
+        constructor() {
+                this.entregaModel = new EntregaModel();
+                this.formAdicionarEntregaController = new FormAdicionarEntregaController('#form', this);
+                this.listarEntregasView = new ListarEntregasView('#form');
         }
 
-        static atualizarTemplateEntregaView(entregas) {
-                let listar_entregas = new ListarEntregasView('#card');
-                listar_entregas.atualiza(entregas);
+        recuperarDadosEntregaModel() {
+                this.atualizarTemplateEntregaView(this.entregaModel.getEntregas());
+        }
+
+        atualizarTemplateEntregaView(entregas) {
+                console.log('Atualizando Template!');
+
+                this.listarEntregasView.atualiza(entregas);
                 this.adicionarOuvintesBotoes();
         }
 
-        static adicionarOuvintesBotoes() {
-                this.ouvintesBotoes('.btn-editar', this.editar);
-                this.ouvintesBotoes('.btn-apagar', this.apagar);
-                this.ouvintesBotoes('.btn-entregar', this.entregar);
+        adicionarOuvintesBotoes() {
+                var $btnAdd = document.querySelector('.btn-nova-entrega');
+                $btnAdd.addEventListener('click', this.criarEntrega.bind(this));
+
+                this.ouvintesBotoes('.btn-editar', this.editar.bind(this));
+                this.ouvintesBotoes('.btn-apagar', this.apagar.bind(this));
+                this.ouvintesBotoes('.btn-entregar', this.entregar.bind(this));
         }
 
-        static ouvintesBotoes(str, acao) {
-                var btn = document.querySelectorAll(str);
-                var group = [...btn];
-                group.map(botao => {
-                        botao.addEventListener('click', () => {
-                                acao(botao.id);
-                        });
-                });
+        ouvintesBotoes(str, acao) {
+                var $btn = document.querySelectorAll(str);
+                var group = [...$btn];
+                group.map($botao => $botao.addEventListener('click', () => acao($botao.id)));
         }
 
-        static editar(id) {
-                console.log("Editar " + id)
+        editar(id) {
+                console.log("Editar " + id);
+                console.log(this);
         }
 
-        static apagar(id) {
-                console.log("Apagar " + id)
+        apagar(id) {
+                console.log("Apagar " + id);
+                var desejaRemover = confirm('Tem certeza que deseja remover esta entrega?');
+                if (desejaRemover) {
+                        let listaEntregas = this.entregaModel.apagarEntrega(id);
+                        if (listaEntregas)
+                                this.atualizarTemplateEntregaView(listaEntregas);
+                        else
+                                alert("Não foi possível remover a entrega!");
+                }
         }
 
-        static entregar(id) {
-                console.log("Entregar " + id)
+        entregar(id) {
+                console.log("Entregar " + id);
+                let listaEntregas = this.entregaModel.concluirEntrega(id);
+                if (listaEntregas)
+                        this.atualizarTemplateEntregaView(listaEntregas);
+                else
+                        alert("Não foi possível concluir a entrega!");
         }
 
-        static criarEntrega(entrega) {
-                console.log(entrega);
-                let novaEntrega = new EntregaModel();
-
-                delete novaEntrega.extensaoURL;
-                delete novaEntrega.baseURL;
-                delete novaEntrega.http;
-                
-                novaEntrega.criarEntrega(entrega.prevista_para, entrega.anotacoes, entrega.produtos,
-                        entrega.destinatario, entrega.responsavel);
-                const http = new HttpSimulator();
-                http.post('deliveryJS/back-end/entregas', novaEntrega);
+        criarEntrega() {
+                this.formAdicionarEntregaController.carregarFormAdicionaEntregaView();
         }
 }
 
-App.recuperarDadosEntregaModel();
+const app = new App();
+app.recuperarDadosEntregaModel();
 
 
 // Adicionar Script Bootstrap caso seja necessário
