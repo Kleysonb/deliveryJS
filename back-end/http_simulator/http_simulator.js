@@ -3,16 +3,7 @@ import { EntregaModel, ListaEntregasModel } from './model.js';
 export class HttpSimulator {
 
     post(url, instance) {
-        let urlAux = url.split('/');
-        if (urlAux.length > 3) {
-            // switch (urlAux[3]) {
-            //     case 'concluirEntrega':
-            //         this.concluirEntrega(urlAux);
-            //         break;
-            // }
-        } else {
-            this.adicionarNovaEntrega(url, instance);
-        }
+        this.adicionarNovaEntrega(url, instance);
     }
 
     concluirEntrega(urlAux) {
@@ -60,16 +51,26 @@ export class HttpSimulator {
     }
 
     put(url, instance) {
-
+        let info = this.getInstance(url, true);
+        let position = info[0];
+        let listaEntregas = info[1];
+        let urlAux = info[2];
+        if(position >= 0){
+            EntregaModel.atualizarEntrega(listaEntregas[position], instance);
+            this.update(urlAux, listaEntregas);
+        }
     }
 
     delete(url) {
         let info = this.getInstance(url, true);
-        if (info[0] >= 0) {
-            info[1].splice(info[0], 1);
+        let position = info[0];
+        let listaEntregas = info[1];
+        let urlAux = info[2];
+        if (position >= 0) {
+            listaEntregas.splice(position, 1);
             console.log('Entrega Removida do Servidor');
-            this.update(info[2], info[1]);
-            return info[1];
+            this.update(urlAux, listaEntregas);
+            return listaEntregas;
         } else {
             return null;
         }

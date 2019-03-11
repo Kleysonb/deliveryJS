@@ -2,14 +2,6 @@ import { uuidv4 } from './uuid_generate.js';
 
 export class EntregaModel {
 
-    // criarEntrega(prevista_para, anotacoes, produtos, destinatario, responsavel) {
-    //     this.prevista_para = prevista_para;
-    //     this.anotacoes = anotacoes;
-    //     this.produtos = produtos;
-    //     this.destinatario = destinatario;
-    //     this.responsavel = responsavel;
-    // }
-
     static criarEntregaServidor(entrega) {
         entrega.id = uuidv4.get();
         console.log("Id Gerado: " + entrega.id);
@@ -26,6 +18,15 @@ export class EntregaModel {
         entrega.concluida_em = new Date();
         entrega.entrega_concluida = true;
         entrega.produtos.map(produto => produto.entregue = true);
+    }
+
+    static atualizarEntrega(entregaAntiga, novaEntrega) {
+        console.log("Atualizando entrega no servidor");
+        entregaAntiga.prevista_para = novaEntrega.prevista_para;
+        entregaAntiga.anotacoes = novaEntrega.anotacoes;
+        // entregaAntiga.produtos = novaEntrega.produtos;
+        entregaAntiga.destinatario = novaEntrega.destinatario;
+        entregaAntiga.responsavel = novaEntrega.responsavel;
     }
 }
 

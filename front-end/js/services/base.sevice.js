@@ -3,7 +3,6 @@ import { HttpSimulator } from '../../../back-end/http_simulator/http_simulator.j
 export class BaseService {
 
     // CRUD com o Servidor
-
     constructor(extensaoURL) {
         this.http = new HttpSimulator();
         this.extensaoURL = extensaoURL;
@@ -18,12 +17,8 @@ export class BaseService {
         return this.http.get(`${this.baseURL}${this.extensaoURL}`);
     }
 
-    readOnly(id) {
-        
-    }
-
-    update(instance) {
-
+    update(id, instance) {
+        this.http.put(`${this.baseURL}${this.extensaoURL}/${id}`, instance);
     }
 
     getPersonalizado(addURL, id){

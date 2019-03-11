@@ -19,24 +19,6 @@ export class EntregaModel extends BaseService {
         this.responsavel = responsavel;
     }
 
-    //prevista_para
-    //anotacoes
-    //produtos
-    //destinatario
-    //responsavel
-
-    // setPrevistaPara(date) {
-    //     this.prevista_para = date;
-    // }
-
-    // setResponsavel(responsavel) {
-    //     this.responsavel = responsavel;
-    // }
-
-    // setAnotacoes(anotacoes) {
-    //     this.anotacoes = anotacoes;
-    // }
-
     // ----------- Comunicação com o Servidor ----------- //
 
     getEntregas() {
@@ -52,8 +34,11 @@ export class EntregaModel extends BaseService {
     }
 
     concluirEntrega(id) {
-        // console.log("Concluir entrega model")
         return super.getPersonalizado('concluirEntrega', id);
+    }
+
+    atualizarEntrega(id, instance){
+        super.update(id, instance);
     }
 
 }

@@ -1,31 +1,38 @@
-import { FormAdicionarEntregaView } from '../view/form_adicionar_entrega.view.js';
+import { FormEntregaView } from '../view/form_adicionar_entrega.view.js';
 import { EntregaModel } from '../model/entrega.model.js';
 
-export class FormAdicionarEntregaController {
+export class FormEntregaController {
 
     constructor($strDiv, homePage) {
-        this.formAdicionarEntregaView = new FormAdicionarEntregaView($strDiv);
+        this.formEntregaView = new FormEntregaView($strDiv);
         this.homePage = homePage;
     }
 
     carregarFormAdicionaEntregaView() {
-        this.formAdicionarEntregaView.atualiza();
+        this.formEntregaView.atualiza();
         this.adicionarOuvintesBotoes();
         this.adicionarOuvintesInputs();
     }
 
-    adicionarOuvintesBotoes() {
+    carregarFormEditarEntregaView(entrega) {
+        this.formEntregaView.atualiza(entrega);
+        this.adicionarOuvintesBotoes(entrega);
+        this.adicionarOuvintesInputs(entrega);
+    }
+
+    adicionarOuvintesBotoes(entrega) {
         let $btnSave = document.getElementById('btn-save');
-        $btnSave.addEventListener('click', this.save.bind(this));
+        $btnSave.addEventListener('click', this.save.bind(this, entrega));
 
         let $btnCancel = document.querySelector('.btn-cancel');
         $btnCancel.addEventListener('click', this.retonar.bind(this));
     }
 
-    adicionarOuvintesInputs() {
+    adicionarOuvintesInputs(entrega) {
         this.$destinatario = document.getElementById('destinatario');
         this.$responsavel = document.getElementById('responsavel');
         this.$produtos = document.getElementById('produtos');
+        if (entrega) this.$produtos.value = entrega.produtos.length;
         this.$dataprevista = document.getElementById('dataprevista');
         this.$anotacoes = document.getElementById('anotacoes');
     }
@@ -86,7 +93,7 @@ export class FormAdicionarEntregaController {
         };
     }
 
-    save() {
+    save(entregaReal) {
         const entrega = {
             prevista_para: this.$dataprevista.value,
             anotacoes: this.$anotacoes.value,
@@ -96,10 +103,13 @@ export class FormAdicionarEntregaController {
         };
 
         let novaEntrega = new EntregaModel();
-
-        novaEntrega.criarEntrega(entrega.prevista_para, entrega.anotacoes, entrega.produtos,
-            entrega.destinatario, entrega.responsavel);
-        novaEntrega.addEntrega(novaEntrega);
+        if (!entregaReal) {
+            novaEntrega.criarEntrega(entrega.prevista_para, entrega.anotacoes, entrega.produtos,
+                entrega.destinatario, entrega.responsavel);
+            novaEntrega.addEntrega(novaEntrega);
+        }else{
+            novaEntrega.atualizarEntrega(entregaReal.id, entrega);
+        }
 
 
         console.log("Save data!");

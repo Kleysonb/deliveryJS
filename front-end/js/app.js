@@ -1,12 +1,12 @@
 import { EntregaModel } from '../js/model/entrega.model.js';
 import { ListarEntregasView } from '../js/view/listar_entregas.view.js';
-import { FormAdicionarEntregaController } from '../js/controller/form_adicionar_entrega.controller.js';
+import { FormEntregaController } from '../js/controller/form_adicionar_entrega.controller.js';
 
 export class App {
 
         constructor() {
                 this.entregaModel = new EntregaModel();
-                this.formAdicionarEntregaController = new FormAdicionarEntregaController('#form', this);
+                this.formEntregaController = new FormEntregaController('#form', this);
                 this.listarEntregasView = new ListarEntregasView('#form');
         }
 
@@ -16,7 +16,6 @@ export class App {
 
         atualizarTemplateEntregaView(entregas) {
                 console.log('Atualizando Template!');
-
                 this.listarEntregasView.atualiza(entregas);
                 this.adicionarOuvintesBotoes();
         }
@@ -38,7 +37,13 @@ export class App {
 
         editar(id) {
                 console.log("Editar " + id);
-                console.log(this);
+                let entregas = this.entregaModel.getEntregas();
+                let entrega = entregas.find(entrega => entrega.id === id);
+                if (entrega) {
+                        this.formEntregaController.carregarFormEditarEntregaView(entrega);
+                } else {
+                        alert("Não foi possível editar esta entrega!");
+                }
         }
 
         apagar(id) {
@@ -63,12 +68,11 @@ export class App {
         }
 
         criarEntrega() {
-                this.formAdicionarEntregaController.carregarFormAdicionaEntregaView();
+                this.formEntregaController.carregarFormAdicionaEntregaView();
         }
 }
 
 const app = new App();
 app.recuperarDadosEntregaModel();
-
 
 // Adicionar Script Bootstrap caso seja necessário

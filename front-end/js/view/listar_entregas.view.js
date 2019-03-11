@@ -7,8 +7,12 @@ export class ListarEntregasView extends View {
     }
 
     getTemplate(model) {
-        if(model.lenght === 0){
-            return '<h5>Você não possui nenhuma entrega!</h5>'
+        if(model.length === 0){
+            return `<h5>Você não possui nenhuma entrega!</h5>
+            <div class="botao-nova-entrega">
+                <button type="button" class="btn btn-nova-entrega btn-light">Adicionar Nova Entrega</button>
+            </div>
+            `
         }
         return `${model.map(
             entrega => 
