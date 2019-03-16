@@ -10,6 +10,25 @@ export class App {
                 this.listarEntregasView = new ListarEntregasView('#form');
         }
 
+        adicionarOuvintesBotoesMenu() {
+                let $nav = document.querySelector('.menu');
+
+                document.querySelector('.logo').addEventListener('click', () => {
+                        $nav.querySelector('.selecionada').classList.remove('selecionada');
+                        $nav.querySelector('[inicial]').setAttribute('class', 'selecionada');
+                        // console.log($nav.querySelector('[inicial]'));
+                });
+
+                let $liItens = $nav.querySelectorAll('li');
+                $liItens.forEach(item => {
+                        item.addEventListener('click', () => {
+                                $nav.querySelector('.selecionada').classList.remove('selecionada');
+                                let $link = item.querySelector('a');
+                                $link.setAttribute('class', 'selecionada');
+                        });
+                });
+        }
+
         recuperarDadosEntregaModel() {
                 this.atualizarTemplateEntregaView(this.entregaModel.getEntregas());
         }
@@ -73,6 +92,7 @@ export class App {
 }
 
 const app = new App();
+app.adicionarOuvintesBotoesMenu();
 app.recuperarDadosEntregaModel();
 
 // Adicionar Script Bootstrap caso seja necessário
